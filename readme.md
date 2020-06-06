@@ -1,9 +1,11 @@
 This is a text file, with a little more description about my data transforming and the data analysis performed
+
 setwd("E:/ljubi/edukacija/Coursera/John Hopkins - Data Science Specialization/cleaning data/week 4/UCI HAR Dataset")
 #firstly we load the work directory, note that I put all the essential
 #data in one folder, so when I initiate list.files() I can pick all
 #of the files I need and analyze them prior(because of dimensions, which
 #we must familiarise ourselves when using join/merge/cbind/rbind etc.)
+
 list.files()
 library(dplyr)
 library(plyr)
