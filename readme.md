@@ -4,7 +4,8 @@ data analysis has also the comments as an info on manipulating the dataframes
 setwd("E:/ljubi/edukacija/Coursera/John Hopkins - Data Science Specialization/cleaning data/week 4/UCI HAR Dataset")
 
 #firstly we load the work directory, note that I put all the essential data in one folder, so when I initiate list.files() I can pick all
-of the files I need and analyze them prior(because of dimensions, which we must familiarise ourselves when using join/merge/cbind/rbind etc.)
+of the files I need and analyze them prior(because of dimensions, which we must familiarise ourselves when using join/merge/cbind/rbind etc.) Of course not only by dimensions we should notice the file but by "raw" opening them, just to see the variables, there are many
+ways of doing that, in this case I used the Atom program(advanced txt editor, it also has many other features) to analyze all the variables.
 
 list.files()
 library(dplyr)
@@ -12,7 +13,7 @@ library(plyr)
 
 activitydescription <- read.table("activity_labels.txt")
 
-#there are 6 different modes of activity, this we will need to assign to subject activity and later make "mass calculations" basing on activity labels and on subjects, in this case we will get the mean and the std just as asked in the assignment
+#there are 6 different modes of activity, this we will need to assign to subject activity and later make "mass calculations" basing on activity labels and on subjects, in this case we will get the mean and the std just as asked in the assignment.
 
 xtest <- read.table("x_test.txt")
 dim(xtest)
@@ -20,29 +21,31 @@ features <- read.table("features.txt")
 dim(features)
 features
 
-#note need to use second column when ascribing designated columns our main "data file has 561 columns, which corresponds to the values of features file, and of course the train file, but firstly before adding everything we need to add combing test files into one dataframe and then add to the combined train files dataframe
+#note need to use second column when ascribing designated columns our main "data file has 561 columns, which corresponds to the values of features file, and of course the train file, but firstly before adding everything we need to add combing test files into one dataframe and then add to the combined train files dataframe, this will be done by rbinding, but before joining test and train dataframes, we need to add columns to make them full datasets, with all the variables we need, activity, activity labels, subjectIDS, mean and std columns.
 
 ytest <- read.table("y_test.txt")
 table(ytest)
 dim(ytest)
 
-#I often use the table command which is very useful in brief analyzing datasets, here we see 6 values, so we can easily assume it is about the activity modes of all subjects, because the row count is the same as the x_test, which are variables which we still need to assign but firstly we will use the grepl method to select only columns which interes us, the mean and the standard deviation
+#I often use the table command which is very useful in brief analyzing datasets, here we see 6 values, so we can easily assume it is about the activity modes of all subjects, because the row count is the same as the x_test, which are variables which we still need to assign but firstly we will use the grepl method to select only columns which interest us, the mean and the standard deviation
 
 featuresnames <- features$V2
 featuresnames
 featuresmeanstd <- features[grep("Mean|mean|std",features$V2),]
 
-#caution, there are column names with Capslock and without, and R is almost always upper or lower letter sensitive
+#caution, there are column names with Capslock and without, and R is almost always upper or lower letter sensitive. In this case we will sort the features we want from the features dataset and then sort the dataframes(test and train) by the sorted features we "grepled".
+I saw someone on the forum mentioned it might be better to add all the dataframes and then do the sorting, it might be an easier and quicker solution, there are always many ways to do the same thing.
+
 featuresmeanstd
 xlistnumbers <- xtest[,featuresmeanstd$V1]
 xlistnumbers
 
-#there are the numbers we have sorted, now we need to add the colnames
+#there are the numbers of columns we have sorted(by mean, MEAN and std criteria, the command will provide us by index numbers, with which we will sort the dataframe), now we need to add the colnames
 
 colnames(xlistnumbers) <- featuresmeanstd$V2
 xtestmeanstd <- xlistnumbers
 
-please note - my variable names could be more straightforward and more descriptive also I should use commands such as %>% to shorten the scripts
+#please note - my variable names could be more straightforward and more descriptive also I should use commands such as %>% to shorten the scripts
 
 stest <- read.table("subject_test.txt")
 table(stest)
@@ -102,12 +105,15 @@ MergedData_final <- merge(activitynames,MergedData,by.x="activitymode_test", by.
 MergedData_final
 colnames(MergedData_final)
 
-#we need to separate the data when doing summaries, not to select the values we don't want, for example our table could be using subject id's for mean calculation if we don't separate the data correctly
+#we need to separate the data when doing summaries, not to select the values we don't want, for example our table could be using subject id's for mean calculation if we don't separate the data correctly, the separating is going to be done by dplyr package, excatly by select command
 
 SortedData <- MergedData_final%>%select(activity_desc,subjectID, 4:89)
 SortedData
+
+#here we are selecting the criteria by activity description and by Subjec id's, the columns from 4 to 89 are the mean and std columns
 Analysis <- SortedData%>%group_by(activity_desc,subjectID)%>%summarize_all(funs(mean))
 Analysis
+#the analysis is being done by the mean of all values based on Subject Id's and activity desc and lastly, we need to write down the files
 library(xlsx)
 write.xlsx(Analysis,"C:/Analysis.xlsx")
 write.table(Analysis,"Analysis-activity.txt",row.names=FALSE)
