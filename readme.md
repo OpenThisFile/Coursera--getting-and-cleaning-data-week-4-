@@ -1,10 +1,9 @@
-This is a text file, with a little more description about my data transforming and the data analysis performed
+This is a text file, with a little more description about my data transforming and the data analysis performed, my initial
+data analysis has also the comments as an info on manipulating the dataframes
 
 setwd("E:/ljubi/edukacija/Coursera/John Hopkins - Data Science Specialization/cleaning data/week 4/UCI HAR Dataset")
 
-#firstly we load the work directory, note that I put all the essential
-
-#data in one folder, so when I initiate list.files() I can pick all
+#firstly we load the work directory, note that I put all the essential data in one folder, so when I initiate list.files() I can pick all
 
 #of the files I need and analyze them prior(because of dimensions, which
 
