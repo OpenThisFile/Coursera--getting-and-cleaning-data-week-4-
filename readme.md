@@ -2,8 +2,9 @@ This is a text file, with a little more description about my data transforming a
 data analysis has also the comments as an info on manipulating the dataframes
 
 setwd("E:/ljubi/edukacija/Coursera/John Hopkins - Data Science Specialization/cleaning data/week 4/UCI HAR Dataset")
+
 #firstly we load the work directory, note that I put all the essential data in one folder, so when I initiate list.files() I can pick all
-#of the files I need and analyze them prior(because of dimensions, which we must familiarise ourselves when using join/merge/cbind/rbind etc.)
+of the files I need and analyze them prior(because of dimensions, which we must familiarise ourselves when using join/merge/cbind/rbind etc.)
 
 list.files()
 library(dplyr)
@@ -110,4 +111,5 @@ Analysis
 library(xlsx)
 write.xlsx(Analysis,"C:/Analysis.xlsx")
 write.table(Analysis,"Analysis-activity.txt",row.names=FALSE)
-Analysis
+
+#we can save our file as an xlsx file or as an txt, however we want, but for xlsx you will need the package xlsx
