@@ -2,22 +2,15 @@ This is a text file, with a little more description about my data transforming a
 data analysis has also the comments as an info on manipulating the dataframes
 
 setwd("E:/ljubi/edukacija/Coursera/John Hopkins - Data Science Specialization/cleaning data/week 4/UCI HAR Dataset")
-
 #firstly we load the work directory, note that I put all the essential data in one folder, so when I initiate list.files() I can pick all
-
-#of the files I need and analyze them prior(because of dimensions, which
-
-#we must familiarise ourselves when using join/merge/cbind/rbind etc.)
+#of the files I need and analyze them prior(because of dimensions, which we must familiarise ourselves when using join/merge/cbind/rbind etc.)
 
 list.files()
 library(dplyr)
 library(plyr)
 
 activitydescription <- read.table("activity_labels.txt")
-#there are 6 different modes of activity, this we will need to assign to
-#subject activity and later make "mass calculations" basing on activity
-#labels and on subjects, in this case we will get the mean and the std
-#just as asked
+#there are 6 different modes of activity, this we will need to assign to subject activity and later make "mass calculations" basing on activity labels and on subjects, in this case we will get the mean and the std just as asked in the assignment
 
 #in the assignment description
 xtest <- read.table("x_test.txt")
