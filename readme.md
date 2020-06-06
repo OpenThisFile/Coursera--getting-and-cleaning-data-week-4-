@@ -20,18 +20,18 @@ dim(features)
 features
 #note need to use second column when ascribing designated
 #columns
-# our main "data file has 561 columns, which corresponds to the values of 
-# features file, and of course the train file, but firstly before adding
+#our main "data file has 561 columns, which corresponds to the values of 
+#features file, and of course the train file, but firstly before adding
 #everything we need to add combing test files into one
-# dataframe and then add to the combined train files dataframe
+#dataframe and then add to the combined train files dataframe
 ytest <- read.table("y_test.txt")
 table(ytest)
 dim(ytest)
-# I often use the table command
-# which is very useful in brief analyzing datasets, 
+#I often use the table command
+#which is very useful in brief analyzing datasets, 
 #here we see 6 values, so we can easily assume it is about the
-# activity modes of all subjects, because the row count is the same
-# as the x_test, which are variables which we still need to assign
+#activity modes of all subjects, because the row count is the same
+#as the x_test, which are variables which we still need to assign
 #but firstly we will use the grepl method to select only columns which
 #interes us, the mean and the standard deviation
 featuresnames <- features$V2
